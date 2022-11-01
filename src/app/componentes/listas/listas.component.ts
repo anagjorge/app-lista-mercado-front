@@ -1,0 +1,47 @@
+import { Component, OnInit } from '@angular/core';
+import { VirtualTimeScheduler } from 'rxjs';
+import { Lista } from 'src/app/model/Lista';
+import { ListasService } from 'src/app/servicos/listas.service';
+
+@Component({
+  selector: 'app-listas',
+  templateUrl: './listas.component.html',
+  styleUrls: ['./listas.component.css']
+})
+export class ListasComponent implements OnInit {
+
+  public listas: Lista[] = [];
+  public novaLista: Lista;
+  constructor(private service: ListasService) { 
+    this.novaLista = new Lista();
+  }
+
+  ngOnInit(): void {
+    this.getAllListas();
+  }
+
+  public getAllListas(){
+    this.service.recuperarListas().subscribe(
+      (res: Lista[]) => {
+        this.listas = res;
+      },
+      (err) =>  {
+        alert("Erro ao recuperar listas");
+      },
+    );
+  }
+
+  public cadastrarLista(){
+  this.service.cadastrarLista(this.novaLista).subscribe(
+    (res: Lista) => {
+      alert("Nova lista cadastrada")
+      this.getAllListas()
+    },
+    (err) => {
+      alert("Erro ao cadastrar nova lista")
+    }
+  )
+
+  }
+
+}
