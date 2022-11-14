@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { VirtualTimeScheduler } from 'rxjs';
 import { Lista } from 'src/app/model/Lista';
 import { ListasService } from 'src/app/servicos/listas.service';
 

@@ -1,52 +1,52 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <h3 class="text-center">Lista de compras</h3>
+            <h3 class="text-center">Lista de Compras</h3>
         </div>
     </div>
-    <hr/>
+    <hr />
     <div class="row lista" *ngFor="let ITEM of listas">
-        <div class="col-3">{{ITEM.data | date: 'dd/MM/yyyy'}}</div>
-        <div class="col-7"> <a [routerLink]= "['/detalhe', ITEM.id]"> {{ITEM.nomeMercado}} </a></div>
-        <div class="col-2">{{ ITEM.valorTotal | currency }}</div>
-    </div> 
+        <div class="col-3"> {{ ITEM.data | date: 'dd/MM/yyyy'}} </div>
+        <div class="col-6"> <a [routerLink]="['/detalhe',ITEM.id]"> {{ ITEM.nomeMercado }} </a> </div>
+        <div class="col-3"> {{ ITEM.valorTotal | currency  }} </div>
+    </div>
 </div>
 
 
+
+<!-- modal para incluir nova lista -->
 <!-- Button trigger modal -->
-<button type="button"  id= "botaoNovaLista" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<button type="button" id="botaoNovaLista" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
     <i class="fa-solid fa-plus fa-2x"></i>
-  </button>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Incluir nova lista</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <div class="mb-3">
-                <label for="txtData" class="form-label">Data de compra</label>
-                <input type="date" class="form-control" id="txtData" [(ngModel)]="novaLista.data">
-              </div>
-              <div class="mb-3">
-                <label for="txtLocal" class="form-label">Nome do local</label>
-                <input type="text" class="form-control" id="txtLocal" [(ngModel)]="novaLista.nomeMercado" >
-              </div>
-              <div class="mb-3">
-                <label for="txtValorTotal" class="form-label">Orçamento/valor total</label>
-                <input type="number" class="form-control" id="txtValorTotal"[(ngModel)]="novaLista.valorTotal">
-              </div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Incluir Nova Lista</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="txtData" class="form-label">Data da compra</label>
+                    <input type="date" class="form-control" id="txtData" [(ngModel)]="novaLista.data">
+                </div>
+                <div class="mb-3">
+                    <label for="txtLocal" class="form-label">Nome do Local</label>
+                    <input type="text" class="form-control" id="txtLocal" [(ngModel)]="novaLista.nomeMercado">
+                </div>
+                <div class="mb-3">
+                    <label for="txtValortotal" class="form-label">Orçamento/Valor Total</label>
+                    <input type="number" class="form-control" id="txtValorTotal" [(ngModel)]="novaLista.valorTotal">
+                </div>
 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-success"  data-bs-dismiss="modal" (click)="cadastrarLista()">Armazenar</button>
+            </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="cadastrarLista()">Salvar</button>
-        </div>
-      </div>
     </div>
-  </div>
-
-
+</div>
