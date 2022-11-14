@@ -1,33 +1,41 @@
 <div class="container">
     <div class="row">
-        <div class="cool-12 text-center">
-            <h3>{{listaCompras.nomeMercado}}</h3>
+        <div class="col-2 text-center">
+            <a [routerLink]='["/"]'><i class="fa-solid fa-angles-left fa-2x"></i></a>
+        </div>
+        <div class="col-10 text-center">
+            <h3>{{ listaCompras.nomeMercado }}</h3>
         </div>
     </div>
+    
 <div class="row título">
     <div class="col-12">
-        Data da compra: {{listaCompras.data}}         Valor total R$   {{listaCompras.valorTotal}}
+        Data da compra: {{listaCompras.data | date : 'dd/MM/yyyy'}}   Valor total <strong>R$   {{listaCompras.valorTotal}}</strong>
     </div>
 </div>
-<div class="row">
+<div class="row mt-12">
     <div class="col-12">
-        <button type="button" class="btn btn-primary" (click)="exibirModal()">Adicionar item</button>
+        <button type="button" class="btn btn-success" (click)="exibirModal()">Adicionar item</button>
     </div>
 </div>
 
 <div class="row" *ngFor="let ITEM of listaCompras.itens">
     <div class="row">
         <div class="col-7">
-            {{ITEM.produto.nome}}
+            <span *ngIf="ITEM.concluido == 0" class="pendente">{{ITEM.produto.nome}}</span>
+            <span *ngIf="ITEM.concluido == 1" class="concluido">{{ITEM.produto.nome}}</span>
         </div>
         <div class="col-1">
             {{ITEM.quantidade}}
         </div>
-        <div class="col-1">
+        <div class="col-2">
             {{ITEM.precoTotal | currency}}
         </div>
     <div class="col-1">
-        <input type="checkbox" class="form-check">
+        <span *ngIf="ITEM.concluido == 0"><input type="checkbox" (click)="atualizarStatus(ITEM);" class="form-check"></span>
+    </div>
+    <div class="col-1">
+        <i class="fa-solid fa-trash-can"></i>
     </div>
     </div>
 </div>

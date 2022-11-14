@@ -91,4 +91,18 @@ export class DetalhelistaComponent implements OnInit {
       }
     )
   }
+
+  public atualizarStatus(item: ItemLista){
+    item.lista = new Lista();
+    item.concluido = 1;
+    item.lista.id = this.idLista;
+    this.itemListaService.alterarItem(item).subscribe(
+      (res:ItemLista)=>{
+        console.log("Item concluído");
+      },
+      (err)=>{
+        alert("Erro ao atualizar item");
+      }
+    );
+  }
 }
